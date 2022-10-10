@@ -7,10 +7,6 @@ export default function Total() {
 
     const {pedido, cliente, colocarOrden, total, handleChangeCliente} = useQuiosco()
     const {nombre,apellido, dni} = cliente
-
-    useEffect(() => {
-        comprobarPedido()
-    }, [pedido,comprobarPedido])
     
     const dniValido = () => {
         let reg = new RegExp("([0-9]{8})|([0-9]{2}\.[0-9]{3}\.[0-9]{3})")
@@ -24,6 +20,10 @@ export default function Total() {
     const comprobarPedido = useCallback(() => {
         return pedido.length === 0 || nombre === '' || nombre.length < 3 || apellido === '' || apellido.length < 3 || !dniValido()
     }, [pedido, cliente]) 
+
+    useEffect(() => {
+        comprobarPedido()
+    }, [pedido,comprobarPedido])
 
     return ( 
         <Layout pagina='Total y Confirmar Pedido'>
